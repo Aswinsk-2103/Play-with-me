@@ -6,20 +6,27 @@ const app = express();
 app.use(express.json({ limit: '20mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const STATS_FILE = path.join(__dirname, 'stats.json');
-const VERIFY_FILE = path.join(__dirname, 'verifications.json');
+const dataDir = process.env.VERCEL ? '/tmp' : __dirname;
+const STATS_FILE = path.join(dataDir, 'stats.json');
+const VERIFY_FILE = path.join(dataDir, 'verifications.json');
 
 const readStats = () => {
   try { return JSON.parse(fs.readFileSync(STATS_FILE, 'utf8')); }
   catch { return { visitors: 0, me: 0, draws: 0 }; }
 };
-const writeStats = (s) => fs.writeFileSync(STATS_FILE, JSON.stringify(s));
+const writeStats = (s) => {
+  try { fs.writeFileSync(STATS_FILE, JSON.stringify(s)); }
+  catch (e) { console.warn('Stats write warning:', e.message); }
+};
 
 const readVerifications = () => {
   try { return JSON.parse(fs.readFileSync(VERIFY_FILE, 'utf8')); }
   catch { return []; }
 };
-const writeVerifications = (v) => fs.writeFileSync(VERIFY_FILE, JSON.stringify(v, null, 2));
+const writeVerifications = (v) => {
+  try { fs.writeFileSync(VERIFY_FILE, JSON.stringify(v, null, 2)); }
+  catch (e) { console.warn('Verifications write warning:', e.message); }
+};
 
 // ---- Game logic: visitor = 'X', avatar (me) = 'O' ----
 const LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -187,4 +194,8 @@ app.get('/api/verifications', (_req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Welcome game running at http://localhost:${PORT}`));
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`Welcome game running at http://localhost:${PORT}`));
+}
+
+module.exports = app;
