@@ -1,0 +1,13 @@
+{
+  "name": "welcome-game",
+  "version": "1.0.0",
+  "description": "Tic-Tac-Toe against my avatar: a welcome game for my GitHub profile",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemailer": "^10.6.0"
+  }
+}

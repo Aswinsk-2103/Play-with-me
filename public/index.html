@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome! Play me at Tic-Tac-Toe</title>
+<link rel="icon" href="avatar.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-container">
+  <main class="app-grid">
+    <!-- Left Column: The Game Arena -->
+    <section class="game-card tilt-card" id="game-card">
+      <header>
+        <h1>Welcome to my GitHub.<br>Let's play now.</h1>
+        <p class="sub">You are X</p>
+      </header>
+
+      <div class="arena">
+        <div class="opponent">
+          <img id="avatar" src="avatar.jpg" alt="Me, your opponent">
+          <p id="bubble" aria-live="polite">Your move.</p>
+        </div>
+
+        <div id="board" role="grid" aria-label="Tic-tac-toe board"></div>
+      </div>
+
+      <div class="controls">
+        <label>Difficulty
+          <select id="level">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard" selected>Hard</option>
+          </select>
+        </label>
+        <button id="restart" type="button">New game</button>
+      </div>
+
+      <p id="stats" class="stats"></p>
+    </section>
+
+    <!-- Right Column: Winner Verification & Answer Box -->
+    <section class="verify-card tilt-card" id="verify-card">
+      <div class="verify-header">
+        <div class="badge-tag">⚡ Hard Level Only</div>
+        <h2>Beat Me on Hard? Claim It!</h2>
+        <p class="verify-desc">
+          Verification is <strong>strictly applicable only if you defeat me on Hard difficulty</strong>. Win a Hard match, then submit your verification with your Name, Gmail, and winning screenshot to <strong>me</strong>.
+        </p>
+      </div>
+
+      <div class="status-banner locked" id="status-banner">
+        <span class="status-dot"></span>
+        <span id="status-text">🔒 Locked — Beat me on Hard mode to unlock verification!</span>
+      </div>
+
+      <form id="verify-form" class="verify-form">
+        <div class="form-level-notice">
+          <span>Required Match Difficulty:</span> <strong class="badge-hard">HARD</strong>
+        </div>
+
+        <div class="form-group">
+          <label for="winner-name">Your Full Name <span class="required">*</span></label>
+          <input type="text" id="winner-name" placeholder="Enter your full name" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="winner-email">Your Gmail Account <span class="required">*</span></label>
+          <input type="email" id="winner-email" placeholder="username@gmail.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label>Match Screenshot (Proof of Win) <span class="required">*</span></label>
+          <div class="upload-area" id="upload-zone">
+            <input type="file" id="winner-screenshot" accept="image/*" class="file-input">
+            <div class="upload-content" id="upload-content">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+              <p class="upload-label">Drag & drop screenshot or <span>browse file</span></p>
+              <p class="upload-hint">PNG, JPG, WebP supported</p>
+            </div>
+            <div class="preview-container hidden" id="preview-container">
+              <img id="preview-img" src="" alt="Screenshot preview">
+              <button type="button" class="remove-preview" id="remove-preview" title="Remove screenshot">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submit-verify" class="btn-submit full-width">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+            <span>Send Verification to me</span>
+          </button>
+        </div>
+
+        <div id="compose-link-wrapper" class="compose-link-wrapper hidden">
+          <a id="compose-link" href="#" target="_blank" rel="noopener" class="compose-fallback-link">
+            📧 Click here if Gmail compose did not open automatically
+          </a>
+        </div>
+
+        <div class="form-feedback hidden" id="form-feedback"></div>
+      </form>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
