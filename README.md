@@ -175,7 +175,6 @@ The AI opponent uses the **Minimax** algorithm:
 ## 👤 Author
 
 - **GitHub:** [@Aswinsk-2103](https://github.com/Aswinsk-2103)
-- **Email:** [skaswin763@gmail.com](mailto:skaswin763@gmail.com)
 
 ---
 
